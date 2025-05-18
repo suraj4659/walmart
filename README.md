@@ -2,7 +2,7 @@
 
 ### Q2: Highest-Rated Category in Each Branch
  ---- Display the branch, category, and avg rating
-'''
+```
 SELECT branch, category, avgr, rank 
 FROM (
   SELECT branch, category, AVG(rating) AS avgr,
@@ -10,7 +10,7 @@ FROM (
   FROM sales_data
   GROUP BY 1, 2
 ) AS ranked
-WHERE rank = 1; '''
+WHERE rank = 1; ```
 
 \-- Q3: Identify the busiest day for each branch based on the number of transactions
 select \* from (select distinct(branch),date,count(*) ,
