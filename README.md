@@ -1,4 +1,4 @@
-# walmart
+# walmart (python + sql )
 
 ### Q2: Highest-Rated Category in Each Branch
  ---- Display the branch, category, and avg rating
