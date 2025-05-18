@@ -2,7 +2,7 @@
 
 ### Q2: Highest-Rated Category in Each Branch
  ---- Display the branch, category, and avg rating
-''' sq
+'''
 SELECT branch, category, avgr, rank 
 FROM (
   SELECT branch, category, AVG(rating) AS avgr,
