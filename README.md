@@ -3,12 +3,14 @@
 ### Q2: Highest-Rated Category in Each Branch
  ---- Display the branch, category, and avg rating
 ''' sq
-select 
-branch,category,avgr,rank from
-(select branch,category,avg(rating) as avgr,
-rank() over(partition by branch order by avg(rating) desc) as rank from sales_data
-group by 1,2) as ranked
-where rank = 1 '''
+SELECT branch, category, avgr, rank 
+FROM (
+  SELECT branch, category, AVG(rating) AS avgr,
+         RANK() OVER(PARTITION BY branch ORDER BY AVG(rating) DESC) AS rank
+  FROM sales_data
+  GROUP BY 1, 2
+) AS ranked
+WHERE rank = 1; '''
 
 \-- Q3: Identify the busiest day for each branch based on the number of transactions
 select \* from (select distinct(branch),date,count(*) ,
