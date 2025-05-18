@@ -2,7 +2,7 @@
 
 ### Q2: Highest-Rated Category in Each Branch
  ---- Display the branch, category, and avg rating
-sql
+```
 SELECT branch, category, avgr, rank 
 FROM (
   SELECT branch, category, AVG(rating) AS avgr,
@@ -10,10 +10,10 @@ FROM (
   FROM sales_data
   GROUP BY 1, 2
 ) AS ranked
-WHERE rank = 1; 
+WHERE rank = 1 ```
 
  ### Q3: Identify the busiest day for each branch based on the number of transactions
-''' SELECT * 
+``` SELECT * 
 FROM (
   SELECT DISTINCT(branch), date, COUNT(*),
          RANK() OVER(PARTITION BY branch ORDER BY COUNT(*) DESC) AS rank
@@ -22,7 +22,7 @@ FROM (
   ORDER BY 1
 )
 WHERE rank = 1;
-'''
+```
 
 ### Q4: Calculate the total quantity of items sold per payment method
 ```
