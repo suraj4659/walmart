@@ -97,16 +97,25 @@ GROUP BY
 branch)
 
 ```
-select r2.branch,
-r2.revenue as rn2,
-r3.revenue as rn3,
-round((r2.revenue-r3.revenue)::numeric/r2.revenue::numeric * 100) as decraeseing_revenue
-from 
+WITH revenue_2022 AS (
+  SELECT branch, SUM(total_sales) AS revenue
+  FROM sales_data
+  WHERE EXTRACT(YEAR FROM date::date) = 2022
+  GROUP BY branch
+),
+revenue_2023 AS (
+  SELECT branch, SUM(total_sales) AS revenue
+  FROM sales_data
+  WHERE EXTRACT(YEAR FROM date::date) = 2023
+  GROUP BY branch
+)
+SELECT r2.branch,
+       r2.revenue AS rn2,
+       r3.revenue AS rn3,
+       ROUND((r2.revenue - r3.revenue)::numeric / r2.revenue::numeric * 100) AS decreasing_revenue
+FROM revenue_2022 AS r2
+JOIN revenue_2023 AS r3 ON r2.branch = r3.branch
+WHERE r2.revenue > r3.revenue
+ORDER BY decreasing_revenue DESC
+LIMIT 5;
 ```
-
-revenue\_2022 as r2
-join
-revenue\_2023 as r3
-on r2.branch=r3.branch
-where r2.revenue > r3.revenue
-order by 4 desc limit 5 can you make  a readme for goyhub from this all i ahve provdie you
